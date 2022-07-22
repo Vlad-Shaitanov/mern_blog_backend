@@ -8,15 +8,15 @@ import { loginValidator } from "./validations/login.js";
 import { postCreateValidator } from "./validations/posts.js";
 import { handleValidationErrors, checkAuth } from "./utils/index.js";
 import { UserController, PostController } from "./controllers/index.js";
+import 'dotenv/config';
 
 //Подключение базы
 /* Название между / и ? в методе connect скажет монгузу, что надо
 подключиться не только к серверу, но и к конкретной базе*/
 mongoose
-	.connect("mongodb+srv://BlogMERN:admin@cluster0.eku9v.mongodb.net/blog?retryWrites=true&w=majority")
+	.connect(`${process.env.REACT_APP_MONGO}`)
 	.then(() => console.log(chalk.greenBright("DB was connected")))
 	.catch((error) => console.log(chalk.redBright("DB connection failed", error)));
-
 
 const PORT = 3010;
 const app = express(); //Инициализация
