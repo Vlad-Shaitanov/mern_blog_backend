@@ -2,6 +2,7 @@ import express from "express";
 import chalk from "chalk";
 import mongoose from "mongoose";
 import multer from "multer";
+import cors from "cors";
 
 import { registerValidator } from "./validations/auth.js";
 import { loginValidator } from "./validations/login.js";
@@ -39,6 +40,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use(express.json());//Обработка JSON
+app.use(cors());//Разрешаем CORS
 
 /*Когда придет запрос на /uploads, express должен
 зайти в статичную папку и в ней искать файл
