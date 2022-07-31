@@ -38,7 +38,7 @@ export const getOne = async (req, res) => {
 
 		/* Ищем пост по id, обновляем в нем просмотры и возвращаем
 		актуальный документ*/
-		await PostModel.findOneAndUpdate(
+		PostModel.findOneAndUpdate(
 			{
 				_id: postId
 			},
@@ -52,7 +52,7 @@ export const getOne = async (req, res) => {
 			},
 			(err, doc) => {
 				if (err) {
-					console.log(error);
+					console.warn(err);
 					return res.status(500).json({
 						message: "Не удалось вернуть статью"
 					});
@@ -67,7 +67,7 @@ export const getOne = async (req, res) => {
 
 				res.json(doc);
 			}
-		);
+		).populate('user');
 
 	} catch (error) {
 		console.log(error);
@@ -104,7 +104,7 @@ export const remove = async (req, res) => {
 		//Вытаскиваем id из запроса
 		const postId = req.params.id;
 
-		await PostModel.findByIdAndDelete(
+		PostModel.findByIdAndDelete(
 			{
 				_id: postId
 			},
