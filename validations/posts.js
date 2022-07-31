@@ -9,7 +9,7 @@ export const postCreateValidator = [
 		.isString(),
 	body("tags", "Неверный формат тэгов (укажите массив)")
 		.optional()
-		.isString(),
+		.isArray(),
 	body("imageUrl", "Неверная ссылка на изображение")
 		.optional()
 		.isString(), //Опцю поле. Если пришло, проверяем
